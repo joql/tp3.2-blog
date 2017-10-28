@@ -49,8 +49,8 @@ class ArticleModel extends BaseModel{
         $image_title_alt_word=C('IMAGE_TITLE_ALT_WORD');
         if(!empty($image_title_alt_word)){
             // 修改图片默认的title和alt
-            $data['content']=preg_replace('/title=\"(?<=").*?(?=")\"/','title="白俊遥博客"',$data['content']);
-            $data['content']=preg_replace('/alt=\"(?<=").*?(?=")\"/','alt="白俊遥博客"',$data['content']);
+            $data['content']=preg_replace('/title=\"(?<=").*?(?=")\"/','title="Joql博客"',$data['content']);
+            $data['content']=preg_replace('/alt=\"(?<=").*?(?=")\"/','alt="Joql博客"',$data['content']);
         }
         // 将绝对路径转换为相对路径
         $data['content']=preg_replace('/src=\"^\/.*\/Upload\/image\/ueditor$/','src="/Upload/image/ueditor',$data['content']);
@@ -109,8 +109,8 @@ class ArticleModel extends BaseModel{
         $image_title_alt_word=C('IMAGE_TITLE_ALT_WORD');
         if(!empty($image_title_alt_word)){
             // 修改图片默认的title和alt
-            $data['content']=preg_replace('/title=\"(?<=").*?(?=")\"/','title="白俊遥博客"',$data['content']);
-            $data['content']=preg_replace('/alt=\"(?<=").*?(?=")\"/','alt="白俊遥博客"',$data['content']);
+            $data['content']=preg_replace('/title=\"(?<=").*?(?=")\"/','title="Joql博客"',$data['content']);
+            $data['content']=preg_replace('/alt=\"(?<=").*?(?=")\"/','alt="Joql博客"',$data['content']);
         }
         // 将绝对路径转换为相对路径
         $data['content']=preg_replace('/src=\"^\/.*\/Upload\/image\/ueditor$/','src="/Upload/image/ueditor',$data['content']);
@@ -128,7 +128,10 @@ class ArticleModel extends BaseModel{
             if(!empty($image_path)){
                 if(C('WATER_TYPE')!=0){
                     foreach ($image_path as $k => $v) {
-                        add_water('.'.$v);
+                        if(strpos($v,'http') === false){//检测是否为网络图片
+                            //添加水印
+                            add_water('.'.$v);
+                        }
                     }
                 }
                 // 添加新图片路径

@@ -67,7 +67,10 @@ class ArticleModel extends BaseModel{
                     // 添加水印
                     if(C('WATER_TYPE')!=0){
                         foreach ($image_path as $k => $v) {
-                            add_water('.'.$v);
+                            //网络图片不添加水印
+                            if(strpos($v,'http') === false){
+                                add_water('.'.$v);
+                            }
                         }
                     }
                     // 传递图片插入数据库

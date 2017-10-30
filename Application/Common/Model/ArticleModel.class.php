@@ -134,6 +134,14 @@ class ArticleModel extends BaseModel{
                         if(strpos($v,'http') === false){//检测是否为网络图片
                             //添加水印
                             add_water('.'.$v);
+                            //相对地址拼接成绝对地址
+                            $v = 'http://'.$_SERVER['HTTP_HOST'].$v;
+                        }
+                        //上传图片到间书，存储简书图片外链
+                        $re = curl("http://kylinqi.cn/api.php?op=savePicByJianShu",['token'=>'asldfjosdfjaosjdfij','old_pic'=>$v]);
+                        $result = json_decode($re,true);
+                        if($result['data']){
+                            $image_path[$k][$v] = $result['data'];
                         }
                     }
                 }

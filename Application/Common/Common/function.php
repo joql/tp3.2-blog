@@ -391,3 +391,52 @@ function word_time($time) {
     }
     return $str;
 }
+
+/**
+ * use for: curl
+ * @param $url
+ * @param array $array
+ * @param string $type
+ * @return bool|mixed
+ * auth: ksj
+ * date:2017-10-10   15:20
+ */
+function curl($url,array $array=array() ,$type = 'get', $cookie='',$header ='') {
+    $ch = curl_init();
+    if($type == 'get'){
+        if(is_array($array)) {
+            $query = http_build_query($array);
+            $url = $url . '?' . $query;
+        }
+    }
+    // 设置cookie
+    if(!empty($cookie)){
+        curl_setopt($ch,CURLOPT_COOKIE,$cookie);
+    }
+    //设置header
+    if($header == 'json'){
+        $head=array(
+            "Content-Type: application/json;charset=UTF-8"
+        );
+        curl_setopt($ch,CURLOPT_HTTPHEADER,$head);
+    }
+    if(stripos($url, "https://") !== false) {
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    }
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
+    if($type == 'post'){
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $array);
+    }
+    $content = curl_exec($ch);
+    $status = curl_getinfo($ch);
+    curl_close($ch);
+    if(intval($status["http_code"]) == 200) {
+        return $content;
+    } else {
+        //echo $status["http_code"];
+        return false;
+    }
+}

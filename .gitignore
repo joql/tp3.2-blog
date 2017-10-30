@@ -5,3 +5,5 @@ Application/Common/Conf/webconfig.php
 node_modules/
 gitpush.php
 Upload/
+Application/Common/Conf/oauth.php
+Application/Common/Conf/webconfig.php

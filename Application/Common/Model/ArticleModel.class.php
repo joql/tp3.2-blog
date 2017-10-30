@@ -138,11 +138,10 @@ class ArticleModel extends BaseModel{
                             $v = 'http://'.$_SERVER['HTTP_HOST'].$v;
                         }
                         //上传图片到间书，存储简书图片外链
-                        $re = curl("http://kylinqi.cn/api.php?op=savePicByJianShu",['token'=>'asldfjosdfjaosjdfij','old_pic'=>$v]);
-                        //echo $re;die();
+                        $re = curl("http://m.kylinqi.cn/api.php?op=savePicByJianShu",['token'=>'asldfjosdfjaosjdfij','old_pic'=>$v],'post');
                         $result = json_decode($re,true);
-                        if($result['data']){
-                            $image_path[$k][$v] = $result['data'];
+                        if($result['code'] == 1){
+                            $image_path[$k] = $result['data'];
                         }
                         sleep(1);
                     }

@@ -117,6 +117,7 @@ class ArticleModel extends BaseModel{
         }
         // 将绝对路径转换为相对路径
         $data['content']=preg_replace('/src=\"^\/.*\/Upload\/image\/ueditor$/','src="/Upload/image/ueditor',$data['content']);
+        changePic2JianShu($data['content']);//替换图片链接
         $data['content']=htmlspecialchars($data['content']);
         if($this->create($data)){
             $aid=$data['aid'];
@@ -135,15 +136,8 @@ class ArticleModel extends BaseModel{
                             //添加水印
                             add_water('.'.$v);
                             //相对地址拼接成绝对地址
-                            $v = 'http://'.$_SERVER['HTTP_HOST'].$v;
+                            //$v = 'http://'.$_SERVER['HTTP_HOST'].$v;
                         }
-                        //上传图片到间书，存储简书图片外链
-                        $re = curl("http://m.kylinqi.cn/api.php?op=savePicByJianShu",['token'=>'asldfjosdfjaosjdfij','old_pic'=>$v],'post');
-                        $result = json_decode($re,true);
-                        if($result['code'] == 1){
-                            $image_path[$k] = $result['data'];
-                        }
-                        sleep(1);
                     }
                 }
                 // 添加新图片路径

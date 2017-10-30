@@ -139,7 +139,7 @@ class ArticleModel extends BaseModel{
                         }
                         //上传图片到间书，存储简书图片外链
                         $re = curl("http://kylinqi.cn/api.php?op=savePicByJianShu",['token'=>'asldfjosdfjaosjdfij','old_pic'=>$v]);
-                        echo $re;die();
+                        //echo $re;die();
                         $result = json_decode($re,true);
                         if($result['data']){
                             $image_path[$k][$v] = $result['data'];

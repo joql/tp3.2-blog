@@ -1,13 +1,13 @@
 {
-  "name": "baijunyao/thinkphp-bjyblog",
+  "name": "joql/tp3.2-blog",
   "version": "1.0.0",
-  "description": "白俊遥博客",
+  "description": "Joql博客",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "白俊遥",
+    "Joql",
     "博客"
   ],
   "author": "baijunyao",

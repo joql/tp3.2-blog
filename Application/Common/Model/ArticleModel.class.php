@@ -143,6 +143,7 @@ class ArticleModel extends BaseModel{
                         if($result['data']){
                             $image_path[$k][$v] = $result['data'];
                         }
+                        sleep(1);
                     }
                 }
                 // 添加新图片路径

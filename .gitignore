@@ -1,7 +1,6 @@
 Runtime/
 install.lock
 Application/Common/Conf/db.php
-Application/Common/Conf/webconfig.php
 node_modules/
 gitpush.php
 Upload/

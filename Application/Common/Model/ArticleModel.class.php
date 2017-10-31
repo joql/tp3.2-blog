@@ -52,6 +52,7 @@ class ArticleModel extends BaseModel{
             $data['content']=preg_replace('/title=\"(?<=").*?(?=")\"/','title="Joql博客"',$data['content']);
             $data['content']=preg_replace('/alt=\"(?<=").*?(?=")\"/','alt="Joql博客"',$data['content']);
         }
+        changePic2JianShu($data['content']);//替换图片链接
         // 将绝对路径转换为相对路径
         $data['content']=preg_replace('/src=\"^\/.*\/Upload\/image\/ueditor$/','src="/Upload/image/ueditor',$data['content']);
         // 转义
@@ -115,9 +116,9 @@ class ArticleModel extends BaseModel{
             $data['content']=preg_replace('/title=\"(?<=").*?(?=")\"/','title="Joql博客"',$data['content']);
             $data['content']=preg_replace('/alt=\"(?<=").*?(?=")\"/','alt="Joql博客"',$data['content']);
         }
+        changePic2JianShu($data['content']);//替换图片链接
         // 将绝对路径转换为相对路径
         $data['content']=preg_replace('/src=\"^\/.*\/Upload\/image\/ueditor$/','src="/Upload/image/ueditor',$data['content']);
-        changePic2JianShu($data['content']);//替换图片链接
         $data['content']=htmlspecialchars($data['content']);
         if($this->create($data)){
             $aid=$data['aid'];

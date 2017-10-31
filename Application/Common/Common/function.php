@@ -257,7 +257,7 @@ function get_rand_number($start=1,$end=10,$length=4){
  * @param  string $str 含有图片链接的字符串
  * @return array       匹配的图片数组
  */
-function get_ueditor_image_path(&$str){
+function get_ueditor_image_path($str){
     //$preg='/\/Upload\/image\/ueditor\/\d*\/\d*\.[jpg|jpeg|png|bmp|gif]*/i'; //只匹配本地图片
     $preg='/img src=&quot;(.*?)&quot;/i'; //匹配链接和本地
     preg_match_all($preg, $str,$data);

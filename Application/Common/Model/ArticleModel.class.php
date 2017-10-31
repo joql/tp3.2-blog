@@ -54,7 +54,7 @@ class ArticleModel extends BaseModel{
         }
         changePic2JianShu($data['content']);//替换图片链接
         // 将绝对路径转换为相对路径
-        $data['content']=preg_replace('/src=\"^\/.*\/Upload\/image\/ueditor$/','src="/Upload/image/ueditor',$data['content']);
+        //$data['content']=preg_replace('/src=\"^\/.*\/Upload\/image\/ueditor$/','src="/Upload/image/ueditor',$data['content']);
         // 转义
         $data['content']=htmlspecialchars($data['content']);
         if($this->create($data)){
@@ -118,7 +118,7 @@ class ArticleModel extends BaseModel{
         }
         changePic2JianShu($data['content']);//替换图片链接
         // 将绝对路径转换为相对路径
-        $data['content']=preg_replace('/src=\"^\/.*\/Upload\/image\/ueditor$/','src="/Upload/image/ueditor',$data['content']);
+        //$data['content']=preg_replace('/src=\"^\/.*\/Upload\/image\/ueditor$/','src="/Upload/image/ueditor',$data['content']);
         $data['content']=htmlspecialchars($data['content']);
         if($this->create($data)){
             $aid=$data['aid'];

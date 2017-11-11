@@ -282,6 +282,24 @@ function changePic2JianShu(&$str){
         return 'c="'.$matches[1].'"';
     },$str);
 }
+function changePic2QiNiu(&$str){
+    //<p><img src="https://ylws.me/usr/uploads/2017/06/1764487747.png" alt="Joql博客
+    $preg='/c=\"(.*?)\"/';
+    //替换图片
+    $str = preg_replace_callback($preg,function ($matches){
+        //判断是否是本地图片
+        if(strpos($matches[1],'http') === false){
+            $matches[1] = 'http://'.$_SERVER['HTTP_HOST'].$matches[1];
+        }
+        //上传图片到间书，存储简书图片外链
+        $re = curl("http://m.kylinqi.cn/api.php?op=savePicByQiNiu",['token'=>'213123123dsafasdff','old_pic'=>$matches[1]],'post');
+        $result = json_decode($re,true);
+        if($result['code'] == 1){
+            $matches[1] = $result['data'];
+        }
+        return 'c="'.$matches[1].'"';
+    },$str);
+}
 /**
  * 将ueditor存入数据库的文章中的图片绝对路径转为相对路径
  * @param  string $content 文章内容

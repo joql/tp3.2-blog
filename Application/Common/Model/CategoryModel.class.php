@@ -53,7 +53,7 @@ class CategoryModel extends BaseModel{
         if($field=='all'){
             $data=$this->order('sort')->select();
             if($tree){
-                return \Org\Bjy\Data::tree($data,'cname');
+                return dir_init($data);
             }else{
                 return $data;
             }

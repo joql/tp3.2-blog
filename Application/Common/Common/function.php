@@ -458,3 +458,22 @@ function curl($url,array $array=array() ,$type = 'get', $cookie='',$header ='') 
         return false;
     }
 }
+
+function dir_init(array $data){
+    if(empty($data)) return false;
+    $arr = array();
+    //第一次遍历确定父目录
+    foreach ($data as $k=>$v){
+        if($v['pid'] == 0) $arr[$v['cid']] = $v;
+    }
+    //分配子目录
+    foreach ($data as $k1=>$v1){
+        if($v1['pid'] != 0){
+            //父目录存在
+            if(!empty($arr[$v1['pid']])){
+                $arr[$v1['pid']]['child'][] = $v1;
+            }
+        }
+    }
+    return $arr;
+}

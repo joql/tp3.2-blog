@@ -33,7 +33,7 @@ class HomeBaseController extends BaseController{
         $show_link=MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME=='Home/Index/index' ? 1 : 0;
         // 分配常用数据
         $assign=array(
-            'categorys'=>D('Category')->getAllData(),
+            'categorys'=>dir_init(D('Category')->getAllData('all',false)),//格式化目录信息
             'tags'=>D('Tag')->getAllData(),
             'links'=>D('Link')->getDataByState(0,1),
             'recommend'=>$recommend,

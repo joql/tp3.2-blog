@@ -287,6 +287,10 @@ function changePic2QiNiu(&$str){
     $preg='/c=\"(.*?)\"/';
     //替换图片
     $str = preg_replace_callback($preg,function ($matches){
+        //判断是否是七牛图片
+        if(strpos($matches[1],'.bkt.clouddn.com') !== false){
+            return 'c="'.$matches[1].'"';
+        }
         //判断是否是本地图片
         if(strpos($matches[1],'http') === false){
             $matches[1] = 'http://'.$_SERVER['HTTP_HOST'].$matches[1];

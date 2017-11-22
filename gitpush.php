@@ -14,3 +14,4 @@ if($name = $_GET['name']){
 }else{
     die('error');
 }
+//gitpush test

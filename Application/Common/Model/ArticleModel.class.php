@@ -257,7 +257,8 @@ class ArticleModel extends BaseModel{
         foreach ($list as $k => $v) {
             $list[$k]['addtime']=word_time($v['addtime']);
             $list[$k]['tag']=D('ArticleTag')->getDataByAid($v['aid'],'all');
-            $list[$k]['pic_path']=D('ArticlePic')->getDataByAid($v['aid']);
+            $list[$k]['pic_path']= D('ArticlePic')->getDataByAid($v['aid']);
+            $list[$k]['pic_path']= $list[$k]['pic_path'] ? $list[$k]['pic_path'] : '/favicon.jpg';
             $list[$k]['category']=current(D('Category')->getDataByCid($v['cid'],'cid,cid,cname'));
             $v['content']=preg_ueditor_image_path($v['content']);
             $list[$k]['content']=htmlspecialchars($v['content']);

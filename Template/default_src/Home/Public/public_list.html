@@ -1,5 +1,5 @@
 <!-- 左侧列表开始 -->
-<div class="col-xs-12 col-md-12 col-lg-8">
+<div class="col-xs-12 col-md-12 col-lg-8 opacitys">
     <notempty name="title_word">
         <div class="row b-tag-title">
             <div class="col-xs-12 col-md-12 col-lg-12">
@@ -28,7 +28,7 @@
             <div class="col-xs-12 col-md-12 col-lg-12">
                 <div class="row">
                     <!-- 文章封面图片开始 -->
-                    <div class="col-sm-6 col-md-6 col-lg-4 hidden-xs">
+                    <div class="col-sm-4 col-md-3 col-lg-4 hidden-xs">
                         <figure class="b-oa-pic b-style1">
                             <a href="{$v['url']}" target="_blank">
                                 <img src="{$v['pic_path']}" alt="{$Think.config.IMAGE_TITLE_ALT_WORD}" title="{$Think.config.IMAGE_TITLE_ALT_WORD}">
@@ -53,7 +53,7 @@
     <!-- 循环文章列表结束 -->
 
     <!-- 列表分页开始 -->
-    <div class="row">
+    <div class="row opacitys">
         <div class="col-xs-12 col-md-12 col-lg-12 b-page">
             {$page}
         </div>

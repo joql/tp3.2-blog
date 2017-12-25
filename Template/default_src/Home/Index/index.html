@@ -2,6 +2,16 @@
 <html lang="en">
 <!-- head头部分开始 -->
 <head>
+<style>
+    .containers{
+        position: absolute;
+        top:60px;
+        margin-left: 30px;
+        margin-right: 30px ;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+</style>
 <include file="Public/public_head" title="" keywords="{$Think.config.WEB_KEYWORDS}" description="{$Think.config.WEB_DESCRIPTION}" />
 </head>
 <!-- head头部分结束 -->
@@ -11,7 +21,7 @@
 <!-- 顶部导航结束 -->
 <div class="b-h-70"></div>
 <!-- 主体部分开始 -->
-<div id="b-content" class="container">
+<div id="b-content" class="containers">
     <div class="row">
         <!-- 通用左侧列表开始 -->
         <include file="Public/public_list" />
@@ -33,4 +43,12 @@
 <include file="Public/public_login" />
 <!-- 登录框结束 -->
 </body>
+<script src="__PUBLIC__/static/js/Particleground.js"></script>
+<script>
+    //粒子背景特效
+    $('body').particleground({
+        dotColor: '#E8DFE8',
+        lineColor: '#133b88'
+    });
+</script>
 </html>

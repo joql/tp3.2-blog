@@ -1,15 +1,15 @@
 <!-- 登录模态框开始 -->
-<div class="modal fade" id="b-modal-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="b-modal-reg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="login">
         <div class="login_title">
-            <span>登录</span>
+            <span>注册</span>
         </div>
         <div class="login_fields">
             <div class="login_fields__user">
                 <div class="icon">
                     <img alt="" src="__HOME_IMAGE__/user_icon_copy.png">
                 </div>
-                <input name="login" placeholder="用户名" maxlength="16" type="text">
+                <input name="username" placeholder="用户名" maxlength="16" type="text">
                 <div class="validation">
                     <img alt="" src="__HOME_IMAGE__/tick.png">
                 </div>
@@ -25,11 +25,20 @@
             </div>
             <div class="login_fields__password">
                 <div class="icon" style="opacity: 0.5;">
+                    <img alt="" src="__HOME_IMAGE__/lock_icon_copy.png">
+                </div>
+                <input name="pwd2" placeholder="请再次密码" maxlength="16" type="password" autocomplete="new-password">
+                <div class="validation">
+                    <img alt="" src="__HOME_IMAGE__/lock_icon_copy.png">
+                </div>
+            </div>
+            <div class="login_fields__password">
+                <div class="icon" style="opacity: 0.5;">
                     <img alt="" src="__HOME_IMAGE__/key.png">
                 </div>
                 <input name="code" placeholder="验证码" maxlength="4" type="text" >
                 <div class="validation" style="opacity: 1; right: -5px;top: -3px;">
-                    <canvas class="J_codeimg" id="myCanvas" onclick="getCheck();">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
+                    <canvas class="J_codeimg" id="myCanvas_reg" onclick="">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
                 </div>
             </div>
             <div class="login_fields__submit">

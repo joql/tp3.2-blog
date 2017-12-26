@@ -499,3 +499,20 @@ function dir_init(array $data){
     }
     return $arr;
 }
+
+//生成随机字符串
+function str_rand($len) {
+    $srcstr = "1a2s3d4f5g6hj8k9qwertyupzxcvbnm";
+    mt_srand();
+    $strs = "";
+    for ($i = 0; $i < $len; $i++) {
+        $strs .= $srcstr[mt_rand(0, 30)];
+    }
+    return $strs;
+}
+
+// ajax返回
+function returnAjax($code, $msg = '', $data = array()){
+    header('Content-Type:application/json; charset=utf-8');
+    exit(json_encode(array('code' => $code, 'data' => $data, 'msg' => $msg)));
+}

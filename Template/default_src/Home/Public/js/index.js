@@ -148,3 +148,78 @@ function recordId(category,id){
     return true;
 }
 
+/**************************************登陆*/
+var CodeVal;
+
+getCheck();
+//获取验证码
+function getCheck() {
+    CodeVal = strRand();
+    showCheck(CodeVal);
+}
+//显示验证码
+function showCheck(a) {
+    CodeVal = a;
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.clearRect(0, 0, 1000, 1000);
+    ctx.font = "80px 'Hiragino Sans GB'";
+    ctx.fillStyle = "#E8DFE8";
+    ctx.fillText(a, 0, 100);
+}
+
+//随机字符串
+function strRand() {
+    var code = "";
+    var codeLength = 4;
+    var selectChar = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+    for (var i = 0; i < codeLength; i++) {
+        var charIndex = Math.floor(Math.random() * 60);
+        if(typeof selectChar[charIndex]!= 'undefined') code += selectChar[charIndex];
+    }
+    if (code.length < codeLength) {
+        code = strRand();
+    }
+    return code;
+}
+
+//登录
+$('.login_fields__submit input').click(function () {
+
+    var username = $('.login_fields__user input[name="login"]').val();
+    var password = $('.login_fields__password input[name="pwd"]').val();
+    var code = $('.login_fields__password input[name="code"]').val();
+    var url = location.protocol+'//'+location.host+'/index.php/Home/User/login';
+    if(username =='' || password =='') {
+        layer.msg('请输入帐号密码');
+        return;
+    }
+    if(code != CodeVal.toLowerCase()){
+        layer.msg('验证码不正确!');
+        return;
+    }
+    $.ajax({
+        url:url,
+        type:"post",
+        data:{
+            'username': username,
+            'password':$.md5(password)
+        },
+        dataType:"json",
+        success:function(data){
+            if(data.code == 1){
+                location.reload();
+            }
+            layer.msg(data.msg);
+        },
+        error:function(xmlHttpRequest,textStatus,errorThrown){
+            alert(textStatus+"出错！"+errorThrown);
+        }
+    });
+});
+
+/****************************注册*/
+// 登录
+function reg(){
+    $('#b-modal-reg').modal('show');
+}

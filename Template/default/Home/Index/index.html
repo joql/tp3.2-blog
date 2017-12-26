@@ -1,13 +1,16 @@
-<!DOCTYPE html><html lang="en"><head><style>
-    .containers{
-        position: absolute;
-        top:60px;
-        margin-left: 30px;
-        margin-right: 30px ;
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-</style><include file="Public/public_head" title="" keywords="{$Think.config.WEB_KEYWORDS}" description="{$Think.config.WEB_DESCRIPTION}"/></head><body><include file="Public/public_nav"/><div class="b-h-70"></div><div id="b-content" class="containers"><div class="row"><include file="Public/public_list"/><include file="Public/public_right"/></div><div class="row"><include file="Public/public_foot"/></div></div><include file="Public/public_login"/></body><script src="__PUBLIC__/static/js/Particleground.js"></script><script>
+<!DOCTYPE html><html lang="en"><head><include file="Public/public_head" title="" keywords="{$Think.config.WEB_KEYWORDS}" description="{$Think.config.WEB_DESCRIPTION}"/><style type="text/css">
+        body{
+            background: #242645;
+        }
+        .containers{
+            position: absolute;
+            top:60px;
+            margin-left: 30px;
+            margin-right: 30px ;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    </style></head><body><include file="Public/public_nav"/><div class="b-h-70"></div><div id="b-content" class="containers"><div class="row"><include file="Public/public_list"/><include file="Public/public_right"/></div><div class="row"><include file="Public/public_foot"/></div></div><include file="Public/public_login"/></body><script src="__PUBLIC__/static/js/Particleground.js"></script><script>
     //粒子背景特效
     $('body').particleground({
         dotColor: '#E8DFE8',

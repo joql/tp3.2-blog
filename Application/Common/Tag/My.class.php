@@ -7,6 +7,8 @@ class My extends TagLib {
     // 定义标签
     protected $tags=array(
         'jquery'=>array('attr'=>'','close'=>0),
+        'layercss'=>array('attr'=>'','close'=>0),
+        'layerjs'=>array('attr'=>'','close'=>0),
         'animate'=>array('attr'=>'','close'=>0),
         'bootstrapcss'=>array('','close'=>0),
         'bootstrapjs'=>array('','close'=>0),
@@ -19,6 +21,14 @@ class My extends TagLib {
     //引入jquery
     public function _jquery(){
         return '<script src="__PUBLIC__/static/js/jquery-2.0.0.min.js"></script>';
+    }
+
+    //引入layer
+    public function _layercss(){
+        return '<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/layer-2.4/skin/layer.css">';
+    }
+    public function _layerjs(){
+        return '<script src="__PUBLIC__/static/layer-2.4/layer.js"></script>';
     }
 
     //引入animate

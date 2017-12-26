@@ -26,5 +26,18 @@ class UserController extends HomeBaseController {
         }
     }
 
+    function login(){
+        $username = I('username');
+        $password = I('password');
+        $salt=M('oauth_user')->field('salt')->where(['username'=>$username])->limit(1)->find();
+        $salt['salt'] || returnAjax(0,'用户不存在');
+        $res=M('oauth_user')->field('id')->where([
+            'username'=>$username,
+            'password'=>md5($password.$salt['salt'])
+        ])->find();
+        $res['id'] || returnAjax(0,'登录失败,账号或密码错误');
+        session('user',$res['id']);
+        returnAjax(1,'success',$res);
+    }
 
 }

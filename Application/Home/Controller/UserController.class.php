@@ -29,9 +29,9 @@ class UserController extends HomeBaseController {
     function login(){
         $username = I('username');
         $password = I('password');
-        $salt=M('oauth_user')->field('salt')->where(['username'=>$username])->limit(1)->find();
+        $salt=M('user')->field('salt')->where(['username'=>$username])->limit(1)->find();
         $salt['salt'] || returnAjax(0,'用户不存在');
-        $res=M('oauth_user')->field('id')->where([
+        $res=M('user')->field('id')->where([
             'username'=>$username,
             'password'=>md5($password.$salt['salt'])
         ])->find();
@@ -40,4 +40,22 @@ class UserController extends HomeBaseController {
         returnAjax(1,'success',$res);
     }
 
+    function reg(){
+        $username = I('username');
+        $password = I('password');
+        $salt=M('user')->field('salt')->where(['username'=>$username])->limit(1)->find();
+        $salt['salt'] && returnAjax(0,'该用户名已存在');
+        $tt = time();
+        $arr_insert = [
+            'username'=>$username,
+            'password'=>md5($password.$tt),
+            'salt'=>$tt,
+            'add_time'=>$tt
+        ];
+        M('user')->add($arr_insert);
+        //die(M()->getLastSql());
+        $res_id = M()->getLastInsID();
+        $res_id || returnAjax(0,'注册失败');
+        returnAjax(1,'success',$res_id);
+    }
 }

@@ -87,7 +87,7 @@ function login(){
 // 退出
 function logout(){
     $.post(logoutUrl);
-    setTimeout(function(){location.replace(location)},500);
+    setTimeout(function(){location.reload()},500);
 }
 
 // 点击返回顶部
@@ -150,7 +150,6 @@ function recordId(category,id){
 
 /**************************************登陆*/
 var CodeVal;
-
 getCheck();
 //获取验证码
 function getCheck() {
@@ -184,11 +183,11 @@ function strRand() {
 }
 
 //登录
-$('.login_fields__submit input').click(function () {
+$('div#b-modal-login .login_fields__submit input').click(function () {
 
-    var username = $('.login_fields__user input[name="login"]').val();
-    var password = $('.login_fields__password input[name="pwd"]').val();
-    var code = $('.login_fields__password input[name="code"]').val();
+    var username = $('div#b-modal-login .login_fields__user input[name="login"]').val();
+    var password = $('div#b-modal-login .login_fields__password input[name="pwd"]').val();
+    var code = $('div#b-modal-login .login_fields__password input[name="code"]').val();
     var url = location.protocol+'//'+location.host+'/index.php/Home/User/login';
     if(username =='' || password =='') {
         layer.msg('请输入帐号密码');
@@ -223,3 +222,65 @@ $('.login_fields__submit input').click(function () {
 function reg(){
     $('#b-modal-reg').modal('show');
 }
+
+var RegCodeVal;
+getRegCheck();
+//获取验证码
+function getRegCheck() {
+    RegCodeVal = strRand();
+    showRegCheck(RegCodeVal);
+}
+//显示验证码
+function showRegCheck(a) {
+    RegCodeVal = a;
+    var c = document.getElementById("myCanvas_reg");
+    var ctx = c.getContext("2d");
+    ctx.clearRect(0, 0, 1000, 1000);
+    ctx.font = "80px 'Hiragino Sans GB'";
+    ctx.fillStyle = "#E8DFE8";
+    ctx.fillText(a, 0, 100);
+}
+//注册
+$('div#b-modal-reg .login_fields__submit input').click(function () {
+
+    var username = $('div#b-modal-reg .login_fields__user input[name="username"]').val();
+    var password = $('div#b-modal-reg .login_fields__password input[name="pwd"]').val();
+    var password2 = $('div#b-modal-reg .login_fields__password input[name="pwd2"]').val();
+    var code = $('div#b-modal-reg .login_fields__password input[name="code"]').val();
+    var url = location.protocol+'//'+location.host+'/index.php/Home/User/reg';
+    if(username =='' || password =='') {
+        layer.msg('请输入帐号密码');
+        return;
+    }
+    if(password != password2){
+        layer.msg('两次密码不一致');
+        return;
+    }
+    if(code != RegCodeVal.toLowerCase()){
+        layer.msg('验证码不正确!');
+        return;
+    }
+    $.ajax({
+        url:url,
+        type:"post",
+        data:{
+            'username': username,
+            'password':$.md5(password)
+        },
+        dataType:"json",
+        success:function(data){
+            if(data.code == 1){
+                setTimeout(function () {
+                    $('#b-modal-reg').modal('hide');
+                    $('#b-modal-login').modal('show');
+                    layer.msg('注册成功，请登录');
+                },1000)
+            }else{
+                layer.msg(data.msg);
+            }
+        },
+        error:function(xmlHttpRequest,textStatus,errorThrown){
+            alert(textStatus+"出错！"+errorThrown);
+        }
+    });
+});

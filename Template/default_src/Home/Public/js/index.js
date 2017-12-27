@@ -284,3 +284,8 @@ $('div#b-modal-reg .login_fields__submit input').click(function () {
         }
     });
 });
+
+//个人资料
+function card(){
+    $('#b-modal-card').modal('show');
+}

@@ -4,6 +4,19 @@
 <head>
     <include file="Public/public_head" title="{$category['cname']}-"  keywords="{$category['keywords']}" description="{$category['description']}" />
     <link rel="canonical" href="{:U('Home/Index/category',array('cid'=>$_GET['cid']),'',true)}" />
+    <style type="text/css">
+        body{
+            background: #242645;
+        }
+        .containers{
+            position: absolute;
+            top:60px;
+            margin-left: 30px;
+            margin-right: 30px ;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    </style>
 </head>
 <!-- head头部分结束 -->
 <body>
@@ -12,7 +25,7 @@
 <!-- 顶部导航结束 -->
 <div class="b-h-70"></div>
 <!-- 主体部分开始 -->
-<div id="b-content" class="container">
+<div id="b-content" class="containers">
     <div class="row">
         <!-- 通用左侧列表开始 -->
         <include file="Public/public_list" />
@@ -33,5 +46,22 @@
 <!-- 登录框开始 -->
 <include file="Public/public_login" />
 <!-- 登录框结束 -->
+<!--注册框start-->
+<include file="Public/public_reg" />
+<!--注册框end-->
 </body>
+<!-- 引入bootstrjs部分开始 -->
+<bootstrapjs />
+<!-- 引入bootstrjs部分结束 -->
+<!--引入layer-->
+<layerjs />
+<script src="/Public/static/js/jquery.md5.js"></script>
+<script src="__PUBLIC__/static/js/Particleground.js"></script>
+<script>
+    //粒子背景特效
+    $('body').particleground({
+        dotColor: '#E8DFE8',
+        lineColor: '#133b88'
+    });
+</script>
 </html>

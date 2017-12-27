@@ -193,7 +193,7 @@ $('div#b-modal-login .login_fields__submit input').click(function () {
         layer.msg('请输入帐号密码');
         return;
     }
-    if(code != CodeVal.toLowerCase()){
+    if(code.toLowerCase() != CodeVal.toLowerCase()){
         layer.msg('验证码不正确!');
         return;
     }
@@ -218,7 +218,7 @@ $('div#b-modal-login .login_fields__submit input').click(function () {
 });
 
 /****************************注册*/
-// 登录
+// 注册
 function reg(){
     $('#b-modal-reg').modal('show');
 }
@@ -256,7 +256,7 @@ $('div#b-modal-reg .login_fields__submit input').click(function () {
         layer.msg('两次密码不一致');
         return;
     }
-    if(code != RegCodeVal.toLowerCase()){
+    if(code.toLowerCase() != RegCodeVal.toLowerCase()){
         layer.msg('验证码不正确!');
         return;
     }

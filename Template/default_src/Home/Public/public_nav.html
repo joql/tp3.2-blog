@@ -1,7 +1,7 @@
 
 
 <!-- 顶部导航开始 -->
-<header >
+<header id="b-public-nav">
     <nav class="navbar navbar-default navbar-fixed-top opacitys">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -38,9 +38,9 @@
                             </ul>
                         </li>
                     </foreach>
-                    <li class="<eq name="cid" value="chat">active</eq> ">
+                    <!--<li class="<eq name="cid" value="chat">active</eq> ">
                     <a href="{:U('Home/Index/chat')}">随言碎语</a>
-                    </li>
+                    </li>-->
                     <!--<li class="b-nav-cname hidden-sm  <eq name="cid" value="git">b-nav-active</eq> ">
                         <a href="{:U('Home/Index/git')}">开源项目</a>
                     </li>-->
@@ -54,7 +54,10 @@
                     </ul>
                     <else />
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" onclick="logout()">退出</a></li>
+                        <li class="b-user-info">
+                            <img class="b-head_img" src="{$Think.session.user.img}" alt="" title=""/>
+                            <a href="#" onclick="logout()">退出</a>
+                        </li>
                     </ul>
                 </empty>
             </div><!-- /.navbar-collapse -->

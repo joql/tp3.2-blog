@@ -31,13 +31,14 @@ class UserController extends HomeBaseController {
         $password = I('password');
         $salt=M('user')->field('salt')->where(['username'=>$username])->limit(1)->find();
         $salt['salt'] || returnAjax(0,'用户不存在');
-        $res=M('user')->field('id')->where([
+        $res=M('user')->field('id,img')->where([
             'username'=>$username,
             'password'=>md5($password.$salt['salt'])
         ])->find();
         $res['id'] || returnAjax(0,'登录失败,账号或密码错误');
-        session('user',$res['id']);
-        returnAjax(1,'success',$res);
+        M('user')->where(['id'=>$res['id']])->save(['last_login_time'=>time(),'login_ip'=>get_client_ip()]);
+        session('user',$res);
+        returnAjax(1,'登陆成功！',$res);
     }
 
     function reg(){
@@ -50,6 +51,9 @@ class UserController extends HomeBaseController {
             'username'=>$username,
             'password'=>md5($password.$tt),
             'salt'=>$tt,
+            'img'=>'/favicon.jpg',
+            'reg_ip'=>get_client_ip(),
+            'status'=>2,
             'add_time'=>$tt
         ];
         M('user')->add($arr_insert);

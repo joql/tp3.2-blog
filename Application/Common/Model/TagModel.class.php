@@ -52,7 +52,11 @@ Class TagModel extends BaseModel{
     public function getAllData(){
         $data=$this->select();
         foreach ($data as $k => $v) {
-            $data[$k]['count']=M('Article_tag')->where(array('tid'=>$v['tid']))->count();
+            $data[$k]['count']=M('Article_tag')
+                ->alias('at')
+                ->join('__ARTICLE__ as a on at.aid=a.aid')
+                ->where(array('at.tid'=>$v['tid']))
+                ->count();
         }
         return $data;
     }

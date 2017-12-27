@@ -1,1 +1,19 @@
-<!DOCTYPE html><html lang="en"><head><include file="Public/public_head" title="{$title}-" keywords="{$Think.config.WEB_KEYWORDS}" description="{$Think.config.WEB_DESCRIPTION}"/><link rel="canonical" href="{:U('Home/Index/tag',array('tid'=>$_GET['tid']),'',true)}"/></head><body><include file="Public/public_nav"/><div class="b-h-70"></div><div id="b-content" class="container"><div class="row"><include file="Public/public_list"/><include file="Public/public_right"/></div><div class="row"><include file="Public/public_foot"/></div></div><include file="Public/public_login"/></body></html>
+<!DOCTYPE html><html lang="en"><head><include file="Public/public_head" title="{$title}-" keywords="{$Think.config.WEB_KEYWORDS}" description="{$Think.config.WEB_DESCRIPTION}"/><link rel="canonical" href="{:U('Home/Index/tag',array('tid'=>$_GET['tid']),'',true)}"/><style type="text/css">
+        body{
+            background: #242645;
+        }
+        .containers{
+            position: absolute;
+            top:60px;
+            margin-left: 30px;
+            margin-right: 30px ;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    </style></head><body><include file="Public/public_nav"/><div class="b-h-70"></div><div id="b-content" class="containers"><div class="row"><include file="Public/public_list"/><include file="Public/public_right"/></div><div class="row"><include file="Public/public_foot"/></div></div><include file="Public/public_login"/><include file="Public/public_reg"/></body><bootstrapjs/><layerjs/><script src="/Public/static/js/jquery.md5.js"></script><script src="__PUBLIC__/static/js/Particleground.js"></script><script>
+    //粒子背景特效
+    $('body').particleground({
+        dotColor: '#E8DFE8',
+        lineColor: '#133b88'
+    });
+</script></html>

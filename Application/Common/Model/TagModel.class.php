@@ -55,7 +55,7 @@ Class TagModel extends BaseModel{
             $data[$k]['count']=M('Article_tag')
                 ->alias('at')
                 ->join('__ARTICLE__ as a on at.aid=a.aid')
-                ->where(array('at.tid'=>$v['tid']))
+                ->where(array('at.tid'=>$v['tid'],'is_delete'=>0))
                 ->count();
         }
         return $data;

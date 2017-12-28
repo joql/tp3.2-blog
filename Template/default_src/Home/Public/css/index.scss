@@ -966,6 +966,8 @@ body .login_fields__submit input:hover {
         margin-left: auto;
         margin-right: auto;
         background: white;
+        border-radius: 36px;
+        opacity: 0.9;
     }
 
     .ProfileHeader-avatar {
@@ -975,20 +977,184 @@ body .login_fields__submit input:hover {
         z-index: 1
     }
 
-    .ProfileEdit--org .ProfileHeader-avatar,.ProfileHeader--org .ProfileHeader-avatar {
-        top: -60px
+    .ProfileEdit {
+        width: 1000px;
+        padding: 0 16px;
+        margin: 14px auto;
+        font-size: 15px;
+        color: #262626
+    }
+
+    .ProfileEdit-fields {
+        padding-bottom: 100px;
+        margin-top: 60px;
+        margin-left:-84px;
+        input[type='text']{
+            width: 50%;
+            float: left;
+            margin: 0 10px 0 10px;
+        }
+        h3{
+            float: left;
+        }
+        div.row{
+            margin-bottom: 20px;
+        }
+        img{
+            width: 150px;
+            height:36px;
+        }
+        label a{
+            margin-left: 65px;
+            font-size: 19px;
+
+        }
+    }
+
+    .ProfileEdit-headlineInput {
+        width: 495px
+    }
+
+    .ProfileEdit-buttons {
+        margin-top: 24px
+    }
+
+    .ProfileEdit-expandActions {
+        bottom: auto
+    }
+
+    .ProfileEdit-arrowIcon {
+        margin: 0 4px 0 8px;
+        -webkit-transform: rotate(-90deg);
+        transform: rotate(-90deg)
+    }
+
+    .Field {
+        padding: 30px 0;
+        border-bottom: 1px solid #ebeef5
+    }
+
+    .Field .ButtonGroup .Button+.Button {
+        margin-left: 16px
+    }
+
+    .Field-label {
+        position: absolute;
+        font-size: 15px;
+        font-weight: 600;
+        font-synthesis: style;
+        line-height: 36px;
+        color: #333
+    }
+
+    html[data-ios] .Field-label {
+        font-weight: 500
+    }
+
+    html[data-android] .Field-label {
+        font-weight: 700
+    }
+
+    .Field-content {
+        padding: 0 64px 0 140px;
+        line-height: 36px
+    }
+
+    .Field-list {
+        margin: 20px -10px 0
+    }
+
+    .Field-dot {
+        margin-right: 10px
+    }
+
+    .Field-input {
+        width: 180px
+    }
+
+    .Field-longInput {
+        width: 495px
+    }
+
+    .Field-autoComplete {
+        display: inline-block
+    }
+
+    .Field-autoComplete:not(:first-child) {
+        margin-left: 16px
+    }
+
+    .Field-card {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        width: 440px;
+        padding: 8px 10px;
+        line-height: 24px;
+        cursor: move
+    }
+
+    .Field-card span {
+        margin-left: 12px;
+        font-size: 15px;
+        color: #262626
+    }
+
+    .Field-hoveredCard {
+        background: #f7f8fa;
+        border-radius: 4px
+    }
+
+    .Field-draggingCard {
+        opacity: 1
+    }
+
+    .Field-delete {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        cursor: pointer;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%)
+    }
+
+    .Field-avatar {
+        vertical-align: top
+    }
+
+    .Field-modify {
+        position: absolute;
+        margin-left: 16px;
+        line-height: inherit;
+        -webkit-transition: opacity .1s;
+        transition: opacity .1s
+    }
+
+    .Field-modify-hidden:not(:focus) {
+        opacity: 0
+    }
+
+    .Field .MaxLength {
+        position: absolute;
+        top: 30px;
+        right: 12px;
+        text-align: right
     }
 
     .ProfileHeader-content {
         padding-top: 16px;
-        padding-left: 32px;
-        border-left: 164px solid transparent
+        border-left: 130px solid transparent
     }
 
     .ProfileHeader-contentHead {
         position: relative;
         padding-right: 106px;
-        margin-bottom: 16px
+        margin-bottom: 16px;
+        margin-top: 10px;
     }
 
     .ProfileHeader-contentHead .Button--plain {

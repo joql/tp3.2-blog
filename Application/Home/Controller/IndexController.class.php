@@ -168,7 +168,16 @@ class IndexController extends HomeBaseController {
         }
     }
 
-
+    //头像更新
+    function changeHeadImg(){
+        empty($_FILES['file']) && returnAjax(0,'err');
+        $fileinfo = $_FILES['file'];
+        $old_path = $fileinfo['tmp_name'];
+        $new_path = 'Public/img/headImg/'.$fileinfo['name'];
+        move_uploaded_file($old_path,$new_path) || returnAjax(0,'err');
+        M('user')->where(['id'=>session('user.id')])->save(['img'=>$new_path]);
+        returnAjax(1,'头像更新成功，重新登录生效');
+    }
 
 
 }

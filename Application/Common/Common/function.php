@@ -516,3 +516,10 @@ function returnAjax($code, $msg = '', $data = array()){
     header('Content-Type:application/json; charset=utf-8');
     exit(json_encode(array('code' => $code, 'data' => $data, 'msg' => $msg)));
 }
+//保存图片
+function savePic($src,$des,$filename){
+    $des = trim($des,'/');
+    $fp = fopen($src,'a');
+    fwrite($fp,$des.'/'.$filename);
+    fclose($fp);
+}

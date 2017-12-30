@@ -285,7 +285,31 @@ $('div#b-modal-reg .login_fields__submit input').click(function () {
     });
 });
 
-//个人资料
+/*************个人资料*/
 function card(){
     $('#b-modal-card').modal('show');
 }
+//更新头像
+$('.UserAvatarEditor-mask').click(function () {
+    $('#file_imgHead').click();
+});
+$('#file_imgHead').change(function () {
+    var url = location.protocol+'//'+location.host+'/index.php/Home/Index/changeHeadImg';
+    var formddata = new FormData();
+    formddata.append('file',$('#file_imgHead')[0].files[0]);
+    $.ajax({
+        url:url,
+        type:"post",
+        data: formddata,
+        cache:false,
+        processData:false,
+        contentType:false,
+        dataType:"json",
+        success:function(data){
+            layer.msg(data.msg);
+        },
+        error:function(xmlHttpRequest,textStatus,errorThrown){
+            alert(textStatus+"出错！"+errorThrown);
+        }
+    });
+});

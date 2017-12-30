@@ -3,7 +3,7 @@
     <div class="ProfileHeader-main" >
         <div class="UserAvatarEditor ProfileHeader-avatar" >
             <div class="UserAvatar" >
-                <img class="Avatar Avatar--large UserAvatar-inner" width="120" height="120" src="https://pic2.zhimg.com/v2-2966dc1c1490900b18506ed47c77232a_xl.jpg" srcset="https://pic2.zhimg.com/v2-2966dc1c1490900b18506ed47c77232a_xll.jpg 2x" />
+                <img class="Avatar Avatar--large UserAvatar-inner" width="120" height="120" src="{$Think.session.user.img}" />
             </div>
             <div class="Mask UserAvatarEditor-mask" >
                 <div class="Mask-mask Mask-mask--black UserAvatarEditor-maskInner" ></div>
@@ -14,7 +14,7 @@
                     <div class="UserAvatarEditor-maskInnerText" >修改我的头像</div>
                 </div>
             </div>
-            <input type="file" accept="image/png,image/jpeg" style="display:none;" />
+            <input type="file" id="file_imgHead" accept="image/png,image/jpeg" style="display:none;" />
         </div>
         <div class="ProfileHeader-content" >
             <div class="ProfileHeader-contentHead" >

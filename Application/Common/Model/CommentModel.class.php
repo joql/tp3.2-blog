@@ -13,9 +13,9 @@ class CommentModel extends BaseModel{
      */
     public function addData($type){
         $data=I('post.');
-        $ouid=$_SESSION['user']['id'];
+        $uid=$_SESSION['user']['id'];
         $nickname=$_SESSION['user']['nickname'];
-        $is_admin=M('Oauth_user')->getFieldById($ouid,'is_admin');
+        $is_admin=M('user')->getFieldById($uid,'is_admin');
         $data['content']=htmlspecialchars_decode($data['content']);
         $data['content']=preg_replace('/on.+\".+\"/i', '', $data['content']);
         // 删除除img外的其他标签
@@ -25,7 +25,7 @@ class CommentModel extends BaseModel{
             return false;
         }
         $comment=array(
-            'ouid'=>$ouid,
+            'uid'=>$uid,
             'type'=>$type,
             'aid'=>$data['aid'],
             'pid'=>$data['pid'],
@@ -36,13 +36,13 @@ class CommentModel extends BaseModel{
         $pattern = "/^([0-9A-Za-z\\-_\\.]+)@([0-9a-z]+\\.[a-z]{2,3}(\\.[a-z]{2})?)$/i";
         // 如果用户输入邮箱；则将邮箱记录入oauth_user表中
         if (preg_match($pattern, $data['email'])) {
-            D('Oauth_user')->where(array('id'=>$_SESSION['user']['id']))->setField('email',$data['email']);
+            M('user')->where(array('id'=>$_SESSION['user']['id']))->save(['email'=>$data['email']]);
         }
         // 添加数据
         $cmtid=$this->add($comment);
 
         // 给站长发送通知邮件
-        if(C('COMMENT_SEND_EMAIL') && $is_admin==0){
+        if(C('COMMENT_SEND_EMAIL') && $is_admin==1){
             $address=C('EMAIL_RECEIVE');
             if(!empty($address)){
                 $title=M('Article')->getFieldByAid($data['aid'],'title');
@@ -59,8 +59,8 @@ html;
         }
         // 给用户发送邮件通知
         if (C('COMMENT_SEND_EMAIL') && $data['pid']!=0) {
-            $parent_uid=$this->getFieldByCmtid($data['pid'],'ouid');
-            $parent_data=M('Oauth_user')->field('nickname,email')->find($parent_uid);
+            $parent_uid=$this->getFieldByCmtid($data['pid'],'uid');
+            $parent_data=M('user')->field('nickname,email')->find($parent_uid);
             $parent_address=$parent_data['email'];
             if (!empty($parent_address)) {
                 $parent_name=$parent_data['nickname'];
@@ -89,15 +89,15 @@ html;
         $count=$this
             ->alias('c')
             ->join('__ARTICLE__ a ON a.aid=c.aid')
-            ->join('__OAUTH_USER__ ou ON ou.id=c.ouid')
+            ->join('__USER__ u ON u.id=c.uid')
             ->where(array('c.is_delete'=>$is_delete))
             ->count();
         $page=new \Org\Bjy\Page($count,15);
         $list=$this
-            ->field('c.*,a.title,ou.nickname')
+            ->field('c.*,a.title,u.nickname')
             ->alias('c')
             ->join('__ARTICLE__ a ON a.aid=c.aid')
-            ->join('__OAUTH_USER__ ou ON ou.id=c.ouid')
+            ->join('__USER__ u ON u.id=c.uid')
             ->where(array('c.is_delete'=>$is_delete))
             ->limit($page->firstRow.','.$page->listRows)
             ->order('date desc')
@@ -127,8 +127,8 @@ html;
         // 关联第三方用户表获取一级评论
         $data=$this
             ->alias('c')
-            ->field('c.*,ou.nickname,ou.head_img')
-            ->join('__OAUTH_USER__ ou ON c.ouid=ou.id')
+            ->field('c.*,u.nickname,u.img')
+            ->join('__USER__ u ON c.uid=u.id')
             ->where($where)
             ->order('date desc')
             ->select();
@@ -143,9 +143,9 @@ html;
                 uasort($child,'comment_sort');
                 foreach ($child as $m => $n) {
                     // 获取被评论人id
-                    $reply_user_id=$this->getFieldByCmtid($n['pid'],'ouid');
+                    $reply_user_id=$this->getFieldByCmtid($n['pid'],'uid');
                     // 获取被评论人昵称
-                    $child[$m]['reply_name']=D('OauthUser')->getFieldById($reply_user_id,'nickname');
+                    $child[$m]['reply_name']=D('user')->getFieldById($reply_user_id,'nickname');
                 }
             }
             $data[$k]['child']=$child;
@@ -155,9 +155,9 @@ html;
     // 递归获取树状结构
     public function getTree($data){
         $child=$this
-            ->field('c.*,ou.nickname,ou.head_img')
+            ->field('c.*,u.nickname,u.img')
             ->alias('c')
-            ->join('__OAUTH_USER__ ou ON c.ouid=ou.id')
+            ->join('__USER__ u ON c.uid=u.id')
             ->where(array('pid'=>$data['cmtid']))
             ->select();
         if(!empty($child)){
@@ -175,7 +175,7 @@ html;
      */
     public function getNewComment(){
         // 获取后台管理员
-        $uids=M('Oauth_user')
+        $uids=M('user')
             ->where(array('is_admin'))
             ->getField('id',true);
         // 如果没有设置管理员；显示全部评论
@@ -186,15 +186,15 @@ html;
         }else{
             // 设置了管理员；则不显示管理员的评论
             $map=array(
-                'ou.id'=>array('notin',$uids),
+                'u.id'=>array('notin',$uids),
                 'c.is_delete'=>0
                 );
         }
         $data=$this
-            ->field('c.content,c.date,a.title,a.aid,ou.nickname,ou.head_img')
+            ->field('c.content,c.date,a.title,a.aid,u.nickname,u.img')
             ->alias('c')
             ->join('__ARTICLE__ a ON c.aid=a.aid')
-            ->join('__OAUTH_USER__ ou ON c.ouid=ou.id')
+            ->join('__USER__ u ON c.uid=u.id')
             ->where($map)
             ->order('c.date desc')
             ->limit(20)

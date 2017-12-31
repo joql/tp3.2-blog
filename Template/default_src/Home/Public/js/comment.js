@@ -96,14 +96,14 @@ function comment(obj){
                     // 获取当前时间
                     var date=now.getFullYear()+"-"+((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1)+"-"+(now.getDate()<10?"0":"")+now.getDate()+'&emsp;'+(now.getHours()<10?"0":"")+now.getHours()+':'+(now.getMinutes()<10?"0":"")+now.getMinutes()+':'+(now.getSeconds()<10?"0":"")+now.getSeconds();
                     var headImg=$('#b-public-nav .b-head_img').attr('src');
-                    var nickName=$('#b-login-word .b-nickname').text();
+                    var nickName=$('#b-public-nav .b-nickname').text();
                     if(pid==0){
                         // pid为0表示新增评论
-                        var str='<div class="row b-user b-parent"><div class="col-xs-2 col-sm-1 col-md-1 col-lg-1 b-pic-col"><img title="Joql博客" alt="Joql博客" src="'+headImg+'" class="b-user-pic"></div><div class="col-xs-10 col-sm-11 col-md-11 col-lg-11 b-content-col"><p class="b-content"><span class="b-user-name">'+nickName+'</span>：'+content+'</p><p class="b-date">'+date+' <a onclick="reply(this)" username="'+nickName+'" pid="'+newPid+'" aid="'+aid+'" href="javascript:;">回复</a></p><div class="b-clear-float"></div></div></div>';
+                        var str='<div class="row b-user b-parent"><div class="col-xs-2 col-sm-1 col-md-1 col-lg-1 b-pic-col b-cc-first"><img title="Joql博客" alt="Joql博客" src="'+headImg+'" class="b-user-pic"></div><div class="col-xs-10 col-sm-11 col-md-11 col-lg-11 b-content-col b-cc-first"><p class="b-content"><span class="b-user-name">'+nickName+'</span>：'+content+'</p><p class="b-date">'+date+' <a onclick="reply(this)" username="'+nickName+'" pid="'+newPid+'" aid="'+aid+'" href="javascript:;">回复</a></p><div class="b-clear-float"></div></div></div>';
                         $('.b-user-comment').prepend(str);
                     }else{
                         // pid不为0表示是回复评论
-                        var str='<div class="row b-user b-child"><div class="col-xs-2 col-sm-1 col-md-1 col-lg-1 b-pic-col"><img title="Joql博客" alt="Joql博客" src="'+headImg+'" class="b-user-pic"></div><ul class="col-xs-10 col-sm-11 col-md-11 col-lg-11 b-content-col"><li class="b-content"><span class="b-reply-name">'+nickName+'</span><span class="b-reply">回复</span><span class="b-user-name">'+replyName+'</span>：'+content+'</li><li class="b-date">'+date+' <a onclick="reply(this)" pid="'+newPid+'" aid="'+aid+'" username="'+replyName+'" href="javascript:;">回复</a></li><li class="b-clear-float"></li></ul></div>';
+                        var str='<div class="row b-user b-child"><div class="col-xs-2 col-sm-1 col-md-1 col-lg-1 b-pic-col"><img title="Joql博客" alt="Joql博客" src="'+headImg+'" class="b-user-pic"></div><ul class="col-xs-10 col-sm-11 col-md-11 col-lg-11 b-content-col b-cc-first"><li class="b-content"><span class="b-reply-name">'+nickName+'</span><span class="b-reply">回复</span><span class="b-user-name">'+replyName+'</span>：'+content+'</li><li class="b-date">'+date+' <a href="javascript:;" pid="'+newPid+'" aid="'+aid+'" username="'+replyName+'" onclick="reply(this)">回复</a></li><li class="b-clear-float"></li></ul></div>';
                         $(obj).parents('.b-content-col').eq(0).append(str);
                         $(obj).parents('.b-box-textarea').eq(0).remove();
                     }

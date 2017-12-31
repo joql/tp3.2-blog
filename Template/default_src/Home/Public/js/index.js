@@ -1,3 +1,6 @@
+
+
+var ajax_url = location.protocol+'//'+location.host+'/index.php';
 $(function(){
     // 调整导航条hover的样式
     if($('.b-nav-mobile').css('display')=='block'){
@@ -188,7 +191,7 @@ $('div#b-modal-login .login_fields__submit input').click(function () {
     var username = $('div#b-modal-login .login_fields__user input[name="login"]').val();
     var password = $('div#b-modal-login .login_fields__password input[name="pwd"]').val();
     var code = $('div#b-modal-login .login_fields__password input[name="code"]').val();
-    var url = location.protocol+'//'+location.host+'/index.php/Home/User/login';
+    var url = ajax_url+'/Home/User/login';
     if(username =='' || password =='') {
         layer.msg('请输入帐号密码');
         return;
@@ -247,7 +250,7 @@ $('div#b-modal-reg .login_fields__submit input').click(function () {
     var password = $('div#b-modal-reg .login_fields__password input[name="pwd"]').val();
     var password2 = $('div#b-modal-reg .login_fields__password input[name="pwd2"]').val();
     var code = $('div#b-modal-reg .login_fields__password input[name="code"]').val();
-    var url = location.protocol+'//'+location.host+'/index.php/Home/User/reg';
+    var url = ajax_url+'/Home/User/reg';
     if(username =='' || password =='') {
         layer.msg('请输入帐号密码');
         return;
@@ -294,7 +297,7 @@ $('.UserAvatarEditor-mask').click(function () {
     $('#file_imgHead').click();
 });
 $('#file_imgHead').change(function () {
-    var url = location.protocol+'//'+location.host+'/index.php/Home/Index/changeHeadImg';
+    var url = ajax_url+'/Home/Index/changeHeadImg';
     var formddata = new FormData();
     formddata.append('file',$('#file_imgHead')[0].files[0]);
     $.ajax({
@@ -306,6 +309,30 @@ $('#file_imgHead').change(function () {
         contentType:false,
         dataType:"json",
         success:function(data){
+            layer.msg(data.msg);
+        },
+        error:function(xmlHttpRequest,textStatus,errorThrown){
+            alert(textStatus+"出错！"+errorThrown);
+        }
+    });
+});
+//修改昵称
+$('div#b-modal-card input.nickname').click(function () {
+    $('div#b-modal-card input.nickname_update').show();
+});
+$('div#b-modal-card input.nickname_update').click(function () {
+    var url = ajax_url+'/Home/Index/changeNickName';
+    $.ajax({
+        url:url,
+        type:"post",
+        data:{
+            name:$('div#b-modal-card input.nickname').val()
+        },
+        dataType:"json",
+        success:function(data){
+            if(data.code == 1){
+                $('div#b-modal-card input.nickname_update').hide();
+            }
             layer.msg(data.msg);
         },
         error:function(xmlHttpRequest,textStatus,errorThrown){

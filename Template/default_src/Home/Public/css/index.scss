@@ -1005,7 +1005,9 @@ body .login_fields__submit input:hover {
         label a{
             margin-left: 65px;
             font-size: 19px;
-
+        }
+        input.nickname_update{
+            display: none;
         }
     }
 

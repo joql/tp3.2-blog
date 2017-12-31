@@ -31,7 +31,7 @@ class UserController extends HomeBaseController {
         $password = I('password');
         $salt=M('user')->field('salt')->where(['username'=>$username])->limit(1)->find();
         $salt['salt'] || returnAjax(0,'用户不存在');
-        $res=M('user')->field('id,img')->where([
+        $res=M('user')->field('id,img,username,nickname')->where([
             'username'=>$username,
             'password'=>md5($password.$salt['salt'])
         ])->find();

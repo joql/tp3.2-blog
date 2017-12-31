@@ -19,14 +19,14 @@
         <div class="ProfileHeader-content" >
             <div class="ProfileHeader-contentHead" >
                 <h1 class="ProfileHeader-title" >
-                    <span class="ProfileHeader-name" >Joql</span>
+                    <span class="ProfileHeader-name" >{$Think.session.user.username}</span>
                 </h1>
             </div>
             <div class="ProfileEdit-fields">
                 <div class="row">
                     <h3>昵称</h3>
-                    <input type="text" class="form-control" />
-                    <input class="btn btn-default" type="button" value="修改" />
+                    <input type="text" class="form-control nickname" value="{$Think.session.user.nickname}" />
+                    <input class="btn btn-default nickname_update" type="button" value="修改"/>
                 </div>
                 <div  class="row">
                     <img src="__HOME_IMAGE__/sina-login.png" />

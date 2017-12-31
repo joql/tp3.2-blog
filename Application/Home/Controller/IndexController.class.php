@@ -176,7 +176,15 @@ class IndexController extends HomeBaseController {
         $new_path = 'Public/img/headImg/'.$fileinfo['name'];
         move_uploaded_file($old_path,$new_path) || returnAjax(0,'err');
         M('user')->where(['id'=>session('user.id')])->save(['img'=>$new_path]);
-        returnAjax(1,'头像更新成功，重新登录生效');
+        session('user.img',$new_path);
+        returnAjax(1,'头像更新成功');
+    }
+  //昵称更新
+    function changeNickName(){
+        empty($_POST['name']) && returnAjax(0,'err');
+        M('user')->where(['id'=>session('user.id')])->save(['nickname'=>$_POST['name']]);
+        session('user.nickname',$_POST['name']);
+        returnAjax(1,'更新成功!');
     }
 
 

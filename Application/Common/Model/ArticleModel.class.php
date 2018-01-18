@@ -187,7 +187,7 @@ class ArticleModel extends BaseModel{
             $page=new \Org\Bjy\Page($count,$limit);
             $list=$this
                 ->where($where)
-                ->order('addtime desc')
+                ->order('is_top desc, addtime desc')
                 ->limit($page->firstRow.','.$page->listRows)
                 ->select();
             $extend=array(
